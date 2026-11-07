@@ -5,48 +5,233 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Return to App</title>
     <style>
-      body {
-        margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        font-family: Arial, sans-serif;
-        background: #ffffff;
-        color: #111827;
+      :root {
+        --color-text: #1a1a1a;
+        --color-muted: #6b7280;
+        --color-border: #d4d7dc;
+        --color-brand-primary: #1f2937;
+        --color-brand-primary-hover: #111827;
+        --color-brand-primary-text: #ffffff;
+        --color-brand-secondary-bg: #ffffff;
+        --color-brand-secondary-text: #1a1a1a;
+        --color-brand-secondary-border: #d4d7dc;
+        --color-background: #ffffff;
+        --color-card-background: #f9fafb;
+
+        --spacing-1: 4px;
+        --spacing-2: 8px;
+        --spacing-3: 12px;
+        --spacing-4: 16px;
+        --spacing-5: 24px;
+        --spacing-6: 32px;
+
+        --radius: 10px;
+        --screen-max-width: 400px;
       }
 
-      .container {
-        max-width: 420px;
-        padding: 24px;
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background: var(--color-background);
+        color: var(--color-text);
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+      }
+
+      .screen {
+        width: 100%;
+        max-width: var(--screen-max-width);
+        min-height: 100vh;
+        align-self: center;
+        padding: 36px 24px 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        background: var(--color-background);
+      }
+
+      .header {
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: var(--spacing-2);
         text-align: center;
+      }
+
+      .logos-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--spacing-6);
+      }
+
+      .logo {
+        width: 140px;
+        height: 50px;
+        object-fit: contain;
+        display: block;
+      }
+
+      .logo-divider {
+        width: 1px;
+        height: 30px;
+        background-color: var(--color-border);
+        margin: 0 10px;
+      }
+
+      .title {
+        margin: 0 0 var(--spacing-3);
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: -0.3px;
+        line-height: 31px;
+        color: var(--color-text);
+        text-align: center;
+      }
+
+      .subtitle {
+        margin: 0 8px;
+        font-size: 15px;
+        line-height: 22px;
+        color: var(--color-muted);
+        text-align: center;
+      }
+
+      .loading-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .spinner {
+        width: 36px;
+        height: 36px;
+        border: 3px solid #d1d5db;
+        border-top-color: var(--color-brand-primary);
+        border-radius: 50%;
+        animation: spin 0.9s linear infinite;
+      }
+
+      .loading-text {
+        margin-top: var(--spacing-4);
+      }
+
+      .loading-subtext {
+        margin-top: var(--spacing-3);
       }
 
       .actions {
         display: none;
-        margin-top: 20px;
+        width: 100%;
+        margin-top: var(--spacing-5);
+        gap: var(--spacing-2);
       }
 
       .btn {
-        display: block;
-        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 100%;
-        margin: 12px 0;
+        min-height: 50px;
         padding: 12px 16px;
-        border-radius: 8px;
+        border: 1.5px solid var(--color-brand-primary);
+        border-radius: var(--radius);
+        background: var(--color-brand-primary);
+        color: var(--color-brand-primary-text);
         text-decoration: none;
+        font-size: 16px;
         font-weight: 600;
-        background: #111827;
-        color: #ffffff;
+      }
+
+      .btn:hover,
+      .btn:active {
+        background: var(--color-brand-primary-hover);
+        border-color: var(--color-brand-primary-hover);
+      }
+
+      .footer {
+        align-items: center;
+        margin-top: auto;
+        padding-top: var(--spacing-5);
+      }
+
+      .legal-text {
+        margin: 0 0 2px;
+        font-size: 12px;
+        line-height: 18px;
+        color: var(--color-muted);
+        text-align: center;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (max-width: 420px) {
+        .logo {
+          width: 120px;
+          height: 44px;
+        }
+
+        .title {
+          font-size: 26px;
+        }
       }
     </style>
   </head>
   <body>
-    <main class="container">
-      <h1>Returning you to the app…</h1>
-      <p>If the app does not open automatically, use the button below.</p>
+    <main class="screen">
+      <div class="header">
+        <div class="logos-container">
+          <img
+            class="logo"
+            src="https://pluo-us.github.io/hems-auth0-acul-assets/assets/toyota-logo.DVwBBANY.png"
+            alt="Toyota"
+          />
+          <div class="logo-divider" aria-hidden="true"></div>
+          <img
+            class="logo"
+            src="https://pluo-us.github.io/hems-auth0-acul-assets/assets/lexus-logo.DPaM_xBm.png"
+            alt="Lexus"
+          />
+        </div>
 
-      <div class="actions" id="actions">
-        <a class="btn" id="open-app" href="#">Open app</a>
+        <h1 class="title">Welcome to HEMS Installer</h1>
+      </div>
+
+      <div class="loading-content">
+        <div class="spinner" aria-hidden="true"></div>
+        <p class="subtitle loading-text">Returning you to the app…</p>
+        <p class="subtitle loading-subtext">
+          If the app does not open automatically, use the button below.
+        </p>
+
+        <div class="actions" id="actions">
+          <a class="btn" id="open-app" href="#">Open app</a>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p class="legal-text">
+          © 2026 Toyota Motor Sales, U.S.A., Inc. All rights reserved.
+        </p>
+        <p class="legal-text">
+          Toyota and Lexus are registered trademarks of their respective owners.
+        </p>
       </div>
     </main>
 
@@ -84,7 +269,8 @@
         setTimeout(function () {
           var actions = document.getElementById('actions');
           if (actions) {
-            actions.style.display = 'block';
+            actions.style.display = 'flex';
+            actions.style.flexDirection = 'column';
           }
         }, 1200);
       })();
