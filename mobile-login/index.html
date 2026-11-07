@@ -12,11 +12,10 @@
         --color-brand-primary: #1f2937;
         --color-brand-primary-hover: #111827;
         --color-brand-primary-text: #ffffff;
-        --color-brand-secondary-bg: #ffffff;
-        --color-brand-secondary-text: #1a1a1a;
-        --color-brand-secondary-border: #d4d7dc;
         --color-background: #ffffff;
-        --color-card-background: #f9fafb;
+        --color-success: #15803d;
+        --color-success-bg: #f0fdf4;
+        --color-success-border: #bbf7d0;
 
         --spacing-1: 4px;
         --spacing-2: 8px;
@@ -99,15 +98,7 @@
         text-align: center;
       }
 
-      .subtitle {
-        margin: 0 8px;
-        font-size: 15px;
-        line-height: 22px;
-        color: var(--color-muted);
-        text-align: center;
-      }
-
-      .loading-content {
+      .content {
         flex: 1;
         display: flex;
         flex-direction: column;
@@ -115,28 +106,52 @@
         align-items: center;
       }
 
-      .spinner {
-        width: 36px;
-        height: 36px;
-        border: 3px solid #d1d5db;
-        border-top-color: var(--color-brand-primary);
-        border-radius: 50%;
-        animation: spin 0.9s linear infinite;
+      .success-badge {
+        width: 64px;
+        height: 64px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-success-bg);
+        border: 1px solid var(--color-success-border);
+        color: var(--color-success);
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: var(--spacing-5);
       }
 
-      .loading-text {
+      .status-title {
+        margin: 0 0 var(--spacing-3);
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 28px;
+        text-align: center;
+        color: var(--color-text);
+      }
+
+      .status-text {
+        margin: 0 8px;
+        font-size: 15px;
+        line-height: 22px;
+        color: var(--color-muted);
+        text-align: center;
+      }
+
+      .status-helper {
         margin-top: var(--spacing-4);
-      }
-
-      .loading-subtext {
-        margin-top: var(--spacing-3);
+        font-size: 14px;
+        line-height: 20px;
+        color: var(--color-muted);
+        text-align: center;
       }
 
       .actions {
-        display: none;
+        display: flex;
         width: 100%;
         margin-top: var(--spacing-5);
         gap: var(--spacing-2);
+        flex-direction: column;
       }
 
       .btn {
@@ -175,12 +190,6 @@
         text-align: center;
       }
 
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
       @media (max-width: 420px) {
         .logo {
           width: 120px;
@@ -213,15 +222,21 @@
         <h1 class="title">Welcome to HEMS Installer</h1>
       </div>
 
-      <div class="loading-content">
-        <div class="spinner" aria-hidden="true"></div>
-        <p class="subtitle loading-text">Returning you to the app…</p>
-        <p class="subtitle loading-subtext">
-          If the app does not open automatically, use the button below.
+      <div class="content">
+        <div class="success-badge" aria-hidden="true">✓</div>
+
+        <h2 class="status-title">Password reset successful</h2>
+
+        <p class="status-text">
+          You can now return to the app and sign in with your new password.
+        </p>
+
+        <p class="status-helper" id="status-helper">
+          Opening the app automatically…
         </p>
 
         <div class="actions" id="actions">
-          <a class="btn" id="open-app" href="#">Open app</a>
+          <a class="btn" id="open-app" href="#">Open App</a>
         </div>
       </div>
 
@@ -260,19 +275,19 @@
           openAppButton.setAttribute('href', deepLink || config.webFallbackUrl);
         }
 
-        if (deepLink) {
-          setTimeout(function () {
+        setTimeout(function () {
+          if (deepLink) {
             window.location.assign(deepLink);
-          }, 150);
-        }
+          }
+        }, 1800);
 
         setTimeout(function () {
-          var actions = document.getElementById('actions');
-          if (actions) {
-            actions.style.display = 'flex';
-            actions.style.flexDirection = 'column';
+          var helper = document.getElementById('status-helper');
+          if (helper) {
+            helper.textContent =
+              'If the app does not open, use the button below.';
           }
-        }, 1200);
+        }, 2600);
       })();
     </script>
   </body>
